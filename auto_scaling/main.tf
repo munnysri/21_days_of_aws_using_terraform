@@ -1,9 +1,9 @@
 provider "aws" {
-  region = "us-west-2"
+  region = "us-east-1"
 }
 
 resource "aws_launch_configuration" "my-test-launch-config" {
-  image_id        = "ami-01ed306a12b7d1c96"
+  image_id        = "ami-0a887e401f7654935"
   instance_type   = "t2.micro"
   security_groups = ["${aws_security_group.my-asg-sg.id}"]
 
@@ -23,7 +23,7 @@ resource "aws_launch_configuration" "my-test-launch-config" {
 resource "aws_autoscaling_group" "example" {
   launch_configuration = "${aws_launch_configuration.my-test-launch-config.name}"
   vpc_zone_identifier  = ["${var.subnet1}","${var.subnet2 }"]
-  target_group_arns    = ["${var.target_group_arn}"]
+  #target_group_arns    = ["${var.target_group_arn}"]
   health_check_type    = "ELB"
 
   min_size = 2
